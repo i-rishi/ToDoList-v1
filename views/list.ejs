@@ -1,0 +1,33 @@
+<%- include("header") -%>
+
+<div class="box" id="heading">
+  <h1><%= kindOfDay %></h1>
+</div>
+
+<div class="box">
+  <% for(let i = 0; i < newItems.length; i++) { %>
+  <div class="item">
+    <input type="checkbox" />
+    <p><%=newItems[i]%></p>
+  </div>
+  <% } %>
+
+  <form class="item" action="/" method="post">
+    <input
+      type="text"
+      name="task"
+      placeholder="Enter the task"
+      autocomplete="off"
+    />
+    <button type="submit" name="list" value="<%= kindOfDay %>">+</button>
+  </form>
+</div>
+
+<!-- Previously coded for test purpose -->
+<!-- <% if(kindOfDay === "Saturday" || kindOfDay === "Sunday"){ %>
+    <h1 style="color: blueviolet">It is a <%= kindOfDay %>!</h1>
+    <%} else { %>
+    <h1 style="color: darkmagenta">It is a <%= kindOfDay %>!</h1>
+    <%}%> -->
+
+<%- include("footer") -%>
