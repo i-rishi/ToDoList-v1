@@ -17,7 +17,7 @@ exports.getDate = () => {
   //   "Saturday",
   // ];
   // const day = weekDay[cDay];
-  return today.toLocaleDateString("hi-IN", options);
+  return today.toLocaleDateString("en-US", options);
 };
 
 exports.getDay = () => {
