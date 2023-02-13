@@ -98,21 +98,22 @@ app.post("/", (req, res) => {
 
   if (taskName.length === 0) {
     res.render("error");
-  }
-  const task = new Task({
-    name: taskName.substring(0, 15),
-  });
-  if (listName === day) {
-    // saving the inserted item to data base
-    task.save();
-    // redirecting back to the home route
-    res.redirect("/");
   } else {
-    List.findOne({ name: listName }, (err, foundList) => {
-      foundList.listItems.push(task);
-      foundList.save();
-      res.redirect("/" + listName);
+    const task = new Task({
+      name: taskName.substring(0, 15),
     });
+    if (listName === day) {
+      // saving the inserted item to data base
+      task.save();
+      // redirecting back to the home route
+      res.redirect("/");
+    } else {
+      List.findOne({ name: listName }, (err, foundList) => {
+        foundList.listItems.push(task);
+        foundList.save();
+        res.redirect("/" + listName);
+      });
+    }
   }
 });
 
@@ -141,13 +142,13 @@ app.post("/delete", (req, res) => {
 });
 
 // get and post requests for another page
-app.get("/work", (req, res) => {
-  res.render("list", { kindOfDay: "Work List", newItems: workItems });
-});
+// app.get("/work", (req, res) => {
+//   res.render("list", { kindOfDay: "Work List", newItems: workItems });
+// });
 
-app.get("/about", (req, res) => {
-  res.render("about");
-});
+// app.get("/about", (req, res) => {
+//   res.render("about");
+// });
 
 app.listen("3000", () => {
   console.log("server is running on port 3000");
