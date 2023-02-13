@@ -22,10 +22,7 @@ const day = date.getDate();
 
 // creating schema for todolist items
 const itemSchema = mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-  },
+  name: String,
 });
 
 const listSchema = mongoose.Schema({
@@ -98,13 +95,17 @@ app.post("/", (req, res) => {
   const taskName = req.body.task;
   const listName = req.body.list;
   // inserting new items by user
+
+  if (taskName.length === 0) {
+    res.render("error");
+  }
   const task = new Task({
-    name: taskName,
+    name: taskName.substring(0, 15),
   });
   if (listName === day) {
     // saving the inserted item to data base
     task.save();
-    // redirecting back to the gome route
+    // redirecting back to the home route
     res.redirect("/");
   } else {
     List.findOne({ name: listName }, (err, foundList) => {
