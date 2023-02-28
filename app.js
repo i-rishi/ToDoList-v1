@@ -11,7 +11,7 @@ app.use(express.static("public"));
 // connecting mongoose database
 mongoose.set("strictQuery", false);
 mongoose.connect(
-  "mongodb+srv://admin-rishi:rishi-admin@atlascluster.e15qmbl.mongodb.net/?retryWrites=true&w=majority",
+  "mongodb+srv://admin-rishi:"+process.env.DB_PASS+"@atlascluster.e15qmbl.mongodb.net/?retryWrites=true&w=majority",
   { useNewUrlParser: true },
   () => {
     console.log("Database connected successfully");
